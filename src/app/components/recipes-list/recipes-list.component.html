@@ -1,0 +1,25 @@
+<App-Action-Bar></App-Action-Bar>
+
+<StackLayout>
+    <FlexboxLayout class="searchBar text-primary">
+        <SearchBar hint="What do you like to eat?"
+                   (submit)="onSubmit($event)">
+        </SearchBar>
+    </FlexboxLayout>
+    <ng-container *ngIf="recipes && !isLoading; else show;">
+        <GridLayout rows="*, auto">
+            <ListView [items]="recipes">
+                <ng-template let-item="item">
+                    <FlexboxLayout flexDirection="row" [nsRouterLink]="['/recipes', item.id]">
+                        <Image [width]="70" src="{{baseUri + '/' + item.image}}">
+                        </Image>
+                        <Label [text]="item.title"></Label>
+                    </FlexboxLayout>
+                </ng-template>
+            </ListView>
+        </GridLayout>
+    </ng-container>
+    <ng-template #show>
+        <ActivityIndicator [busy]="isLoading" class="activity-indicator"></ActivityIndicator>
+    </ng-template>
+</StackLayout>
