@@ -3,18 +3,11 @@ import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RecipesListComponent } from './components/recipes-list/recipes-list.component';
-import { RecipeDetailsComponent } from './components/recipe-details/recipe-details.component';
-import { CommonModule, JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ActionBarComponent } from '~/app/components/action-bar/action-bar.component';
 import { RequestInterceptor } from '~/app/others/request-interceptor.service';
-
-// Uncomment and add to NgModule imports if you need to use two-way binding
-// import { NativeScriptFormsModule } from "nativescript-angular/forms";
-
-// Uncomment and add to NgModule imports if you need to use the HttpClient wrapper
-// import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
+import { TNSFontIconModule } from 'nativescript-ngx-fonticon/nativescript-ngx-fonticon';
+import { components } from '~/app/components';
 
 @NgModule({
     bootstrap: [
@@ -24,20 +17,21 @@ import { RequestInterceptor } from '~/app/others/request-interceptor.service';
         NativeScriptModule,
         AppRoutingModule,
         CommonModule,
-        HttpClientModule
+        HttpClientModule,
+        TNSFontIconModule.forRoot({
+            'mdi': require('~/assets/styles/material-design-icons.css'),
+            'fa': require('~/assets/styles/font-awesome.css')
+        })
     ],
     declarations: [
         AppComponent,
-        ActionBarComponent,
-        RecipesListComponent,
-        RecipeDetailsComponent
+        components
     ],
-    providers: [JsonPipe,
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: RequestInterceptor,
-            multi: true
-        }],
+    providers: [{
+        provide: HTTP_INTERCEPTORS,
+        useClass: RequestInterceptor,
+        multi: true
+    }],
     schemas: [
         NO_ERRORS_SCHEMA
     ]

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '~/app/services/recipe.service';
 import { SimpleRecipe } from '~/app/model/simple-recipe';
-import { JsonPipe } from '@angular/common';
 
 @Component({
     selector: 'Recipes-List',
@@ -12,8 +11,7 @@ export class RecipesListComponent implements OnInit {
     isLoading = false;
     baseUri: string;
 
-    constructor(private jsonPipe: JsonPipe,
-                private recipeService: RecipeService) {
+    constructor(private recipeService: RecipeService) {
     }
 
     ngOnInit(): void {

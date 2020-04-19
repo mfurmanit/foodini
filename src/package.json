@@ -3,6 +3,6 @@
   "android": {
     "v8Flags": "--expose_gc",
     "markingMode": "none",
-    "maxLogcatObjectSize": 10000
+    "maxLogcatObjectSize": 1000000
   }
 }

@@ -10,8 +10,12 @@ export class RequestInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (request.url.includes(environment.apiUrl))
-            request = request.clone({url: request.url + `&apiKey=${environment.apiKey}`});
+            request = request.clone({url: request.url + `${this.sign(request.url)}apiKey=${environment.apiKey}`});
 
         return next.handle(request);
+    }
+
+    private sign(url: string): string {
+        return url.includes('?') ? '&' : '?';
     }
 }

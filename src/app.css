@@ -33,3 +33,32 @@ Button.-primary {
 Label.title {
     font-size: 26;
 }
+
+.mdi {
+    font-family: Material Icons, material-icons;
+    font-size: 45;
+}
+
+.fa {
+    font-family: FontAwesome, font-awesome;
+    font-size: 40;
+}
+
+.fs-30 {
+    font-size: 30;
+}
+
+.c-gold {
+    color: gold;
+}
+
+.c-red {
+    color: red;
+}
+
+.extended-button {
+    font-size: 30;
+    android-elevation: 3;
+    height: 70;
+    width: 280
+}

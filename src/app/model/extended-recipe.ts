@@ -1,0 +1,43 @@
+import { ExtendedIngredient } from '~/app/model/extended-ingredient';
+import { AnalyzedInstruction } from '~/app/model/analyzed-instruction';
+import { WinePairing } from '~/app/model/wine-pairing';
+
+export interface ExtendedRecipe {
+    vegetarian: boolean;
+    vegan: boolean;
+    glutenFree: boolean;
+    dairyFree: boolean;
+    veryHealthy: boolean;
+    cheap: boolean;
+    veryPopular: boolean;
+    sustainable: boolean;
+    weightWatcherSmartPoints: number;
+    gaps: string;
+    lowFodmap: boolean;
+    preparationMinutes: number;
+    cookingMinutes: number;
+    sourceUrl: string;
+    spoonacularSourceUrl: string;
+    aggregateLikes: number;
+    spoonacularScore: number;
+    healthScore: number;
+    creditsText: string;
+    sourceName: string;
+    pricePerServing: number;
+    extendedIngredients: ExtendedIngredient[];
+    id: number;
+    title: string;
+    readyInMinutes: number;
+    servings: number;
+    image: string;
+    imageType: string;
+    summary: string;
+    cuisines: any[];
+    dishTypes: string[];
+    diets: string[];
+    occasions: any[];
+    winePairing: WinePairing;
+    instructions: string;
+    analyzedInstructions: AnalyzedInstruction[];
+    originalId: null;
+}
