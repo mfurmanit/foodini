@@ -1,0 +1,16 @@
+<App-Action-Bar></App-Action-Bar>
+
+<ScrollView>
+    <FlexboxLayout flexDirection="column" *ngIf="recipe">
+        <Recipe-Instructions-Stepper [step]="step.number">
+        </Recipe-Instructions-Stepper>
+        <StackLayout class="m-l-20 m-r-20 m-b-20 m-t-20" height="2" backgroundColor="Black"></StackLayout>
+        <Label class="text-center m-5" style="font-size: 30; font-weight: bold" [text]="'STEP'"></Label>
+        <HtmlView class="text-center m-15" style="font-size: 20" [html]="step.step"></HtmlView>
+                <FlexboxLayout *ngFor="let ingredient of step.ingredients" flexDirection="row">
+                    <Label [text]="ingredient.name | uppercase"></Label>
+                    <Image [width]="100" src="{{getIngredient(ingredient.image)}}">
+                    </Image>
+                </FlexboxLayout>
+    </FlexboxLayout>
+</ScrollView>

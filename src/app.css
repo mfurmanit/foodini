@@ -62,3 +62,17 @@ Label.title {
     height: 70;
     width: 280
 }
+
+.stepper-arrow {
+    text-align: center;
+    vertical-align: center;
+}
+
+.stepper-point {
+    font-size: 25;
+    padding: 15;
+    border-width: 3;
+    border-radius: 50;
+    font-weight: bold;
+    text-align: center;
+}

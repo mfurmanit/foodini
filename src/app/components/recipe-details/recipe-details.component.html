@@ -2,8 +2,7 @@
 
 <ScrollView>
     <FlexboxLayout flexDirection="column" *ngIf="recipe">
-        <Image class="m-20" [width]="300" [src]="recipe.image"></Image>
-        <Label class="h1 text-center m-l-10 m-r-10" [textWrap]="true" [text]="recipe.title | titlecase"></Label>
+        <Recipe-Basic-Info [recipe]="recipe"></Recipe-Basic-Info>
         <StackLayout class="m-l-20 m-r-20 m-b-20 m-t-10" height="2" backgroundColor="Black"></StackLayout>
         <Extended-Label [classes]="['c-gold']" [icon]="'mdi-stars'"
                         [text]="'Score: ' + recipe.healthScore">

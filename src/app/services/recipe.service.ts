@@ -12,6 +12,8 @@ import { ExtendedRecipe } from '~/app/model/extended-recipe';
 })
 export class RecipeService {
 
+    recipe: ExtendedRecipe;
+
     constructor(private httpClient: HttpClient) {
     }
 
