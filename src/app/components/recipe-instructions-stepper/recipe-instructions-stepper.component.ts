@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
     selector: 'Recipe-Instructions-Stepper',
@@ -6,6 +6,9 @@ import { Component, Input } from '@angular/core';
 })
 export class RecipeInstructionsStepperComponent {
     @Input() step: number = 1;
+    @Input() steps: number = 1;
+    @Output() onPreviousTap: EventEmitter<any> = new EventEmitter<any>();
+    @Output() onNextTap: EventEmitter<any> = new EventEmitter<any>();
 
     constructor() {
     }

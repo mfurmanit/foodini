@@ -9,6 +9,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RequestInterceptor } from '~/app/others/request-interceptor.service';
 import { TNSFontIconModule } from 'nativescript-ngx-fonticon/nativescript-ngx-fonticon';
 import { components } from '~/app/components';
+import { SnackBarService } from '~/app/services/snack-bar.service';
 
 @NgModule({
     bootstrap: [
@@ -29,7 +30,7 @@ import { components } from '~/app/components';
         AppComponent,
         components
     ],
-    providers: [{
+    providers: [SnackBarService, {
         provide: HTTP_INTERCEPTORS,
         useClass: RequestInterceptor,
         multi: true
