@@ -1,41 +1,36 @@
 <App-Action-Bar></App-Action-Bar>
 
 <ScrollView>
-    <FlexboxLayout flexDirection="column" *ngIf="recipe">
-        <Recipe-Instructions-Stepper [step]="step.number" [steps]="steps"
-        (onNextTap)="nextStep()" (onPreviousTap)="previousStep()">
+    <FlexboxLayout flexDirection="column" *ngIf="recipe && recipe.analyzedInstructions">
+        <Recipe-Instructions-Stepper [step]="actualStepIndex + 1" [steps]="amountOfSteps"
+                                     (onNextTap)="nextStep()" (onPreviousTap)="previousStep()">
         </Recipe-Instructions-Stepper>
-        <StackLayout class="m-l-20 m-r-20 m-b-20 m-t-20" height="2" backgroundColor="Black"></StackLayout>
-        <Label class="text-center m-t-5 m-b-5" style="font-size: 30; font-weight: bold" [text]="'STEP'"></Label>
-        <HtmlView class="text-center m-15" style="font-size: 20" [html]="step.step"></HtmlView>
 
-        <ng-container *ngIf="step.ingredients && step.ingredients.length > 0">
+        <StackLayout class="m-l-20 m-r-20 m-b-20 m-t-20 divider"></StackLayout>
+        <Label class="text-center instruction-label m-t-5 m-b-5" [text]="'STEP'"></Label>
+        <HtmlView class="text-center m-15 fs-20" [html]="step.step"></HtmlView>
 
-            <StackLayout>
-                <StackLayout class="m-l-20 m-r-20 m-b-20 m-t-20" height="2" backgroundColor="Black"></StackLayout>
-
-                <Label class="text-center m-t-5 m-b-15" style="font-size: 30; font-weight: bold" [text]="'INGREDIENTS'"></Label>
+        <StackLayout *ngIf="step.ingredients && step.ingredients.length > 0">
+            <StackLayout class="m-l-20 m-r-20 m-b-20 m-t-20 divider"></StackLayout>
+            <Label class="text-center instruction-label m-t-5 m-b-15" [text]="'INGREDIENTS'"></Label>
             <GridLayout *ngFor="let ingredient of step.ingredients" columns="*, 250" rows="auto">
-                <Label [textWrap]="true" style="text-align: center; vertical-align: center; font-weight: bold; font-size: 20" col="0" row="0" [text]="ingredient.name | uppercase"></Label>
-                <Image col="1" row="0" [width]="150" src="{{getIngredient(ingredient.image)}}">
+                <Label col="0" row="0" [textWrap]="true" class="instruction-item"
+                       [text]="ingredient.name | uppercase"></Label>
+                <Image col="1" row="0" [width]="150" [src]="getIngredientImage(ingredient.image)">
                 </Image>
             </GridLayout>
-            </StackLayout>
-        </ng-container>
+        </StackLayout>
 
-        <ng-container *ngIf="step.equipment && step.equipment.length > 0">
-
-            <StackLayout>
-                <StackLayout class="m-l-20 m-r-20 m-b-20 m-t-20" height="2" backgroundColor="Black"></StackLayout>
-
-                <Label class="text-center m-t-15 m-b-15" style="font-size: 30; font-weight: bold" [text]="'EQUIPMENT'"></Label>
+        <StackLayout *ngIf="step.equipment && step.equipment.length > 0">
+            <StackLayout class="m-l-20 m-r-20 m-b-20 m-t-20 divider"></StackLayout>
+            <Label class="text-center instruction-label m-t-15 m-b-15" [text]="'EQUIPMENT'"></Label>
             <GridLayout *ngFor="let equipment of step.equipment" columns="*, 250" rows="auto">
-                <Label [textWrap]="true" style="text-align: center; vertical-align: center; font-weight: bold; font-size: 20" col="0" row="0" [text]="equipment.name | uppercase"></Label>
-                <Image col="1" row="0" [width]="150" src="{{getEquipment(equipment.image)}}">
+                <Label col="0" row="0" [textWrap]="true" class="instruction-item"
+                       [text]="equipment.name | uppercase"></Label>
+                <Image col="1" row="0" [width]="150" [src]="getEquipmentImage(equipment.image)">
                 </Image>
             </GridLayout>
-            </StackLayout>
-        </ng-container>
+        </StackLayout>
 
     </FlexboxLayout>
 </ScrollView>

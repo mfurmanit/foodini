@@ -24,6 +24,7 @@
     "nativescript-angular": "~8.21.0",
     "nativescript-material-snackbar": "^2.5.4",
     "nativescript-ngx-fonticon": "^5.0.2",
+    "nativescript-sqlite": "^2.6.0",
     "reflect-metadata": "~0.1.12",
     "rxjs": "^6.4.0",
     "tns-core-modules": "~6.5.0",

@@ -305,6 +305,7 @@ module.exports = env => {
                 { from: { glob: "fonts/**" } },
                 { from: { glob: "**/*.jpg" } },
                 { from: { glob: "**/*.png" } },
+                { from: { glob: "**/*.sqlite" } },
             ], { ignore: [`${relative(appPath, appResourcesFullPath)}/**`] }),
             new nsWebpack.GenerateNativeScriptEntryPointsPlugin("bundle"),
             // For instructions on how to set up workers with webpack
@@ -351,6 +352,10 @@ module.exports = env => {
     if (hmr) {
         config.plugins.push(new webpack.HotModuleReplacementPlugin());
     }
+
+    externals.push('nativescript-sqlite-commercial');
+    externals.push('nativescript-sqlite-encrypted');
+    externals.push('nativescript-sqlite-sync');
 
     return config;
 };

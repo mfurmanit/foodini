@@ -44,6 +44,10 @@ Label.title {
     font-size: 40;
 }
 
+.fs-20 {
+    font-size: 20;
+}
+
 .fs-30 {
     font-size: 30;
 }
@@ -75,4 +79,21 @@ Label.title {
     border-radius: 50;
     font-weight: bold;
     text-align: center;
+}
+
+.instruction-label {
+    font-size: 30;
+    font-weight: bold;
+}
+
+.instruction-item {
+    text-align: center;
+    vertical-align: center;
+    font-weight: bold;
+    font-size: 20;
+}
+
+.divider {
+    height: 2;
+    background-color: black;
 }
