@@ -15,13 +15,13 @@
         </Extended-Label>
         <StackLayout class="m-l-20 m-r-20 m-b-20 m-t-20" height="2" backgroundColor="Black"></StackLayout>
         <Extended-Button [icon]="'mdi-description'"
-                         [text]="'Summary'" (onTap)="onSummaryTap()">
+                         [text]="'Summary'" (tap)="onSummaryTap()">
         </Extended-Button>
         <Extended-Button [icon]="'mdi-assignment'"
-                         [text]="'Instructions'" (onTap)="onInstructionsTap()">
+                         [text]="'Instructions'" (tap)="onInstructionsTap()">
         </Extended-Button>
-        <Extended-Button [icon]="'mdi-favorite'" [buttonClasses]="['c-red']" (onTap)="onFavouritesTap()"
-                         [labelClasses]="['c-red']" [text]="'Add to favourites'">
+        <Extended-Button *ngIf="showFavourites" [icon]="'mdi-favorite'" [buttonClasses]="['c-red']"
+                         [labelClasses]="['c-red']" [text]="'Add to favourites'" (tap)="onFavouritesTap()">
         </Extended-Button>
         <StackLayout class="m-l-20 m-r-20 m-b-20 m-t-20" height="2" backgroundColor="Black"></StackLayout>
     </FlexboxLayout>

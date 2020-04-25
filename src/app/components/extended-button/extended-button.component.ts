@@ -10,7 +10,6 @@ export class ExtendedButtonComponent implements OnInit {
     @Input() text: string;
     @Input() labelClasses: string[];
     @Input() buttonClasses: string[];
-    @Output() onTap = new EventEmitter();
     labelClass: string = 'mdi';
     buttonClass: string = 'extended-button';
 

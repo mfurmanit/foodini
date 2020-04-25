@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/internal/operators';
-import { ResponseModel } from '~/app/model/response-model';
-import { Observable } from 'rxjs/internal/Observable';
-import { SimpleRecipe } from '~/app/model/simple-recipe';
-import { environment } from '~/assets/environment';
-import { ExtendedRecipe } from '~/app/model/extended-recipe';
 
-var Sqlite = require("nativescript-sqlite");
+var Sqlite = require('nativescript-sqlite');
+
+export interface ObservableInt<T> {
+    then(...any: any): void;
+}
 
 @Injectable({
     providedIn: 'root'
@@ -15,79 +12,50 @@ var Sqlite = require("nativescript-sqlite");
 export class DatabaseService {
 
     private database: any;
-    public people: Array<any>;
-    public favourites: any;
+    public favourites: string[][];
 
-    initializeFavourites(): void {
-        (new Sqlite("my.db")).then(db => {
-            db.execSQL("CREATE TABLE IF NOT EXISTS favourites (id TEXT)").then(id => {
-                this.database = db;
-                console.log(id);
-            }, error => {
-                console.log("CREATE TABLE ERROR", error);
-            });
-        }, error => {
-            console.log("OPEN DB ERROR", error);
-        });
+    public constructor() {
+        // Sqlite.deleteDatabase("my.db");
+        this.initializeData();
+    }
+
+    private initializeData(): void {
+        (new Sqlite('my.db')).then(db => {
+            this.database = db;
+            this.initializeFavouritesTable();
+            this.initializeRecipesTable();
+        }, error => console.log(`Error occurred while opening database. Trace is ${error}`));
+    }
+
+    private initializeFavouritesTable(): void {
+        this.database.execSQL('CREATE TABLE IF NOT EXISTS favourites (id TEXT)').then(() => {
+            console.log('Favourites table created successfully.');
+            this.fetchFavourites();
+        }, error => console.log(`Error occurred while creating favourites table. Trace is ${error}`));
+    }
+
+    private initializeRecipesTable(): void {
+        this.database.execSQL('CREATE TABLE IF NOT EXISTS recipes (id TEXT)').then(() => {
+            console.log('Favourites table created successfully.');
+        }, error => console.log(`Error occurred while creating favourites table. Trace is ${error}`));
     }
 
     public insertFavourite(id: number) {
-        this.database.execSQL(`INSERT INTO favourites (id) VALUES (?)`, [id.toString()]).then(id2 => {
-            console.log("INSERT RESULT", id2);
-            // this.fetch();
-        }, error => {
-            console.log("INSERT ERROR", error);
-        });
+        this.database.execSQL(`INSERT INTO favourites (id) VALUES (?)`, [id.toString()]).then(() => {
+            console.log('Favourite row inserted successfully.');
+            this.fetchFavourites();
+        }, error => console.log(`Error occurred while inserting favourites row. Trace is ${error}`));
     }
 
-    public getFavourites() {
-        this.database.all("SELECT * FROM favourites").then(rows => {
+    public fetchFavourites() {
+        this.database.all('SELECT * FROM favourites').then(rows => {
             this.favourites = rows;
-            console.log(rows);
-        }, error => {
-            console.log("SELECT ERROR", error);
-        });
+            console.log('Favourites fetched successfully.');
+        }, error => console.log(`Error occurred while fetching favourites. Trace is ${error}`));
     }
 
-    public constructor() {
-        this.people = [];
-        this.initializeFavourites();
-        // (new Sqlite("my.db")).then(db => {
-        //     console.log(Sqlite.exists("my.db"));
-        //     console.log(db);
-        //     db.execSQL("CREATE TABLE IF NOT EXISTS people (id INTEGER PRIMARY KEY AUTOINCREMENT, firstname TEXT, lastname TEXT)").then(id => {
-        //         this.database = db;
-        //         console.log(id);
-        //     }, error => {
-        //         console.log("CREATE TABLE ERROR", error);
-        //     });
-        // }, error => {
-        //     console.log("OPEN DB ERROR", error);
-        // });
+    public checkFavourites(id: number): ObservableInt<string[]> {
+        return this.database.get('SELECT * FROM favourites WHERE id=?', [id.toString()]);
     }
-
-    public insert() {
-        this.database.execSQL("INSERT INTO people (firstname, lastname) VALUES (?, ?)", ["Nic", "Raboy"]).then(id => {
-            console.log("INSERT RESULT", id);
-            this.fetch();
-        }, error => {
-            console.log("INSERT ERROR", error);
-        });
-    }
-
-    public fetch() {
-        this.database.all("SELECT * FROM people").then(rows => {
-            this.people = [];
-            for(var row in rows) {
-                this.people.push({
-                    "firstname": rows[row][1],
-                    "lastname": rows[row][2]
-                });
-            }
-        }, error => {
-            console.log("SELECT ERROR", error);
-        });
-    }
-
 
 }
