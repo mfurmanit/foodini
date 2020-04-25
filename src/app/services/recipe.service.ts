@@ -13,6 +13,7 @@ import { ExtendedRecipe } from '~/app/model/extended-recipe';
 export class RecipeService {
 
     recipe: ExtendedRecipe;
+    recipeImageUrl: string = 'https://spoonacular.com/recipeImages/';
 
     constructor(private httpClient: HttpClient) {
     }

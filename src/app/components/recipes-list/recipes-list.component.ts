@@ -9,9 +9,10 @@ import { SimpleRecipe } from '~/app/model/simple-recipe';
 export class RecipesListComponent implements OnInit {
     recipes: SimpleRecipe[];
     isLoading = false;
-    baseUri: string;
+    recipeImageUrl: string;
 
     constructor(private recipeService: RecipeService) {
+        this.recipeImageUrl = this.recipeService.recipeImageUrl;
     }
 
     ngOnInit(): void {
@@ -24,7 +25,6 @@ export class RecipesListComponent implements OnInit {
     loadRecipes(query: string): void {
         this.isLoading = true;
         this.recipeService.getRecipes(query).subscribe(data => {
-            this.baseUri = data.baseUri;
             this.recipes = data.results;
             this.isLoading = false;
         });

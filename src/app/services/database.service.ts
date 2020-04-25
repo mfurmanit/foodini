@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/internal/Subject';
 
 var Sqlite = require('nativescript-sqlite');
 
@@ -12,11 +13,16 @@ export interface ObservableInt<T> {
 export class DatabaseService {
 
     private database: any;
-    public favourites: string[][];
+    private favourites: any;
+    public favouritesFetched: Subject<boolean> = new Subject();
 
     public constructor() {
         // Sqlite.deleteDatabase("my.db");
         this.initializeData();
+    }
+
+    public getFavourites(): any {
+        return this.favourites;
     }
 
     private initializeData(): void {
@@ -28,7 +34,7 @@ export class DatabaseService {
     }
 
     private initializeFavouritesTable(): void {
-        this.database.execSQL('CREATE TABLE IF NOT EXISTS favourites (id TEXT)').then(() => {
+        this.database.execSQL('CREATE TABLE IF NOT EXISTS favourites (id TEXT, title TEXT, image TEXT)').then(() => {
             console.log('Favourites table created successfully.');
             this.fetchFavourites();
         }, error => console.log(`Error occurred while creating favourites table. Trace is ${error}`));
@@ -40,8 +46,8 @@ export class DatabaseService {
         }, error => console.log(`Error occurred while creating favourites table. Trace is ${error}`));
     }
 
-    public insertFavourite(id: number) {
-        this.database.execSQL(`INSERT INTO favourites (id) VALUES (?)`, [id.toString()]).then(() => {
+    public insertFavourite(id: number, title: string, image: string) {
+        this.database.execSQL(`INSERT INTO favourites (id, title, image) VALUES (?, ?, ?)`, [id.toString(), title, image]).then(() => {
             console.log('Favourite row inserted successfully.');
             this.fetchFavourites();
         }, error => console.log(`Error occurred while inserting favourites row. Trace is ${error}`));
@@ -50,6 +56,8 @@ export class DatabaseService {
     public fetchFavourites() {
         this.database.all('SELECT * FROM favourites').then(rows => {
             this.favourites = rows;
+            this.favouritesFetched.next(true);
+            console.log(rows);
             console.log('Favourites fetched successfully.');
         }, error => console.log(`Error occurred while fetching favourites. Trace is ${error}`));
     }

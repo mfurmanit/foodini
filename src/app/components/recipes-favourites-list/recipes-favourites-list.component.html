@@ -1,15 +1,10 @@
 <StackLayout>
-    <FlexboxLayout class="searchBar text-primary">
-        <SearchBar hint="What do you like to eat?"
-                   (submit)="onSubmit($event)">
-        </SearchBar>
-    </FlexboxLayout>
     <ng-container *ngIf="recipes && !isLoading; else show;">
         <GridLayout rows="*, auto">
             <ListView [items]="recipes">
                 <ng-template let-item="item">
                     <FlexboxLayout flexDirection="row" [nsRouterLink]="['/recipes', item.id]">
-                        <Image [width]="70" src="{{recipeImageUrl + '/' + item.image}}">
+                        <Image [width]="70" src="{{item.image}}">
                         </Image>
                         <Label [text]="item.title"></Label>
                     </FlexboxLayout>

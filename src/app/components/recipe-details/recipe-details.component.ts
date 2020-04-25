@@ -25,19 +25,15 @@ export class RecipeDetailsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.recipe = MockRecipe as ExtendedRecipe;
-        this.recipeService.recipe = this.recipe;
-        // TODO uncomment on production (commented for better development flow)
-        // this.id = +this.route.snapshot.params.id;
-        // this.recipeService.getRecipeDetails(this.id.toString()).subscribe(data => {
-        //     this.recipe = data as ExtendedRecipe;
-        // });
+        this.id = +this.route.snapshot.params.id;
+        this.recipeService.getRecipeDetails(this.id.toString()).subscribe(data => {
+            this.recipe = data as ExtendedRecipe;
+        });
         this.checkFavourites();
     }
 
     private checkFavourites(): void {
-        // TODO fetch from this.id
-        this.database.checkFavourites(503683).then(result => this.showFavourites = isNullOrUndefined(result));
+        this.database.checkFavourites(this.id).then(result => this.showFavourites = isNullOrUndefined(result));
     }
 
     onSummaryTap(): void {
@@ -49,7 +45,7 @@ export class RecipeDetailsComponent implements OnInit {
     }
 
     onFavouritesTap(): void {
-        this.database.insertFavourite(this.recipe.id);
+        this.database.insertFavourite(this.recipe.id, this.recipe.title, this.recipe.image);
         this.showFavourites = false;
         this.snackBarService.showSimple('Recipe has been added to favorites!')
     }
