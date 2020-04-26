@@ -12,7 +12,8 @@ export class SnackBarService {
     }
 
     showSimple(message: string): any {
-        this.snackbar.simple(message);
+        const snackBar = new SnackBar();
+        snackBar.simple(message);
     }
 
     showAction(message: string, actionText: string, delay: number = 2000): any {

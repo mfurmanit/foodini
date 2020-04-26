@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeService } from '~/app/services/recipe.service';
 import { ExtendedRecipe } from '~/app/model/extended-recipe';
-import { MockRecipe } from '~/app/model/mock-recipe';
-import { RouterExtensions } from "nativescript-angular/router";
 import { DatabaseService } from '~/app/services/database.service';
 import { isNullOrUndefined } from '~/app/others/utils';
 import { SnackBarService } from '~/app/services/snack-bar.service';
@@ -15,7 +13,7 @@ import { SnackBarService } from '~/app/services/snack-bar.service';
 export class RecipeDetailsComponent implements OnInit {
     id: number;
     recipe: ExtendedRecipe;
-    showFavourites: boolean = true;
+    isFavourite: boolean = true;
 
     constructor(private route: ActivatedRoute,
                 private router: Router,
@@ -28,12 +26,13 @@ export class RecipeDetailsComponent implements OnInit {
         this.id = +this.route.snapshot.params.id;
         this.recipeService.getRecipeDetails(this.id.toString()).subscribe(data => {
             this.recipe = data as ExtendedRecipe;
+            this.recipeService.recipe = this.recipe;
         });
         this.checkFavourites();
     }
 
     private checkFavourites(): void {
-        this.database.checkFavourites(this.id).then(result => this.showFavourites = isNullOrUndefined(result));
+        this.database.checkFavourites(this.id).then(result => this.isFavourite = !isNullOrUndefined(result));
     }
 
     onSummaryTap(): void {
@@ -45,8 +44,14 @@ export class RecipeDetailsComponent implements OnInit {
     }
 
     onFavouritesTap(): void {
-        this.database.insertFavourite(this.recipe.id, this.recipe.title, this.recipe.image);
-        this.showFavourites = false;
-        this.snackBarService.showSimple('Recipe has been added to favorites!')
+        if (this.isFavourite) {
+            this.database.deleteFavourite(this.recipe.id);
+            this.isFavourite = false;
+            this.snackBarService.showSimple('Recipe has been deleted from favorites!');
+        } else {
+            this.database.insertFavourite(this.recipe.id, this.recipe.title, this.recipe.image);
+            this.isFavourite = true;
+            this.snackBarService.showSimple('Recipe has been added to favorites!');
+        }
     }
 }

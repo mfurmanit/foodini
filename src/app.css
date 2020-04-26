@@ -28,6 +28,9 @@ Button.-primary {
     border-width: 2;
     border-color: black;
     font-size: 20;
+    margin: 10;
+    color: goldenrod;
+    background-color: goldenrod;
 }
 
 Label.title {
@@ -50,6 +53,18 @@ Label.title {
 
 .fs-30 {
     font-size: 30;
+}
+
+.fs-40 {
+    font-size: 40;
+}
+
+.fs-50 {
+    font-size: 50;
+}
+
+.fs-100 {
+    font-size: 100;
 }
 
 .c-gold {
@@ -97,3 +112,12 @@ Label.title {
     height: 2;
     background-color: black;
 }
+
+.v-align-middle {
+    vertical-align: middle;
+}
+
+.opacity-medium {
+    opacity: 0.5;
+}
+

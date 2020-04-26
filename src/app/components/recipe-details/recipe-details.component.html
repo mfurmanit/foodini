@@ -20,8 +20,9 @@
         <Extended-Button [icon]="'mdi-assignment'"
                          [text]="'Instructions'" (tap)="onInstructionsTap()">
         </Extended-Button>
-        <Extended-Button *ngIf="showFavourites" [icon]="'mdi-favorite'" [buttonClasses]="['c-red']"
-                         [labelClasses]="['c-red']" [text]="'Add to favourites'" (tap)="onFavouritesTap()">
+        <Extended-Button [icon]="'mdi-favorite'" [buttonClasses]="['c-red']"
+                         [labelClasses]="['c-red']" [text]="(isFavourite ? 'Undo favourite' : 'Add to favourites')"
+                         (tap)="onFavouritesTap()">
         </Extended-Button>
         <StackLayout class="m-l-20 m-r-20 m-b-20 m-t-20" height="2" backgroundColor="Black"></StackLayout>
     </FlexboxLayout>

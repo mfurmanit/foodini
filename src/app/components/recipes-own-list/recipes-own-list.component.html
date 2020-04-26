@@ -1,10 +1,12 @@
+<Button (tap)="addRecipe()" [text]="'ADD NEW RECIPE'"></Button>
 <StackLayout>
     <ng-container *ngIf="recipes && recipes.length > 0; else show;">
         <GridLayout rows="*, auto">
             <ListView [items]="recipes">
                 <ng-template let-item="item">
                     <FlexboxLayout flexDirection="row" [nsRouterLink]="['/recipes', item.id]">
-                        <Image [width]="70" src="{{item.image}}">
+                        <Image *ngIf="item.imageUrl && item.imageUrl != 'https://'" [width]="70"
+                               src="{{item.imageUrl}}">
                         </Image>
                         <Label [text]="item.title"></Label>
                     </FlexboxLayout>
@@ -14,8 +16,8 @@
     </ng-container>
     <ng-template #show>
         <GridLayout rows="*, auto">
-            <Background-Label [text]="'NO FAVOURITE RECIPES'"
-                              [icon]="'mdi-favorite'">
+            <Background-Label [text]="'NO OWN RECIPES'"
+                              [icon]="'mdi-local-dining'">
             </Background-Label>
         </GridLayout>
     </ng-template>

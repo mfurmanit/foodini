@@ -1,11 +1,12 @@
 <StackLayout>
-    <FlexboxLayout class="searchBar text-primary">
+    <StackLayout class="searchBar text-primary">
         <SearchBar hint="What do you like to eat?"
+                   (clear)="onClear($event)"
                    (submit)="onSubmit($event)">
         </SearchBar>
-    </FlexboxLayout>
-    <ng-container *ngIf="recipes && !isLoading; else show;">
-        <GridLayout rows="*, auto">
+    </StackLayout>
+    <GridLayout rows="*, auto">
+        <ng-container *ngIf="recipes && recipes.length > 0 && !isLoading;">
             <ListView [items]="recipes">
                 <ng-template let-item="item">
                     <FlexboxLayout flexDirection="row" [nsRouterLink]="['/recipes', item.id]">
@@ -15,11 +16,16 @@
                     </FlexboxLayout>
                 </ng-template>
             </ListView>
-        </GridLayout>
-    </ng-container>
-    <ng-template #show>
-        <ActivityIndicator [busy]="isLoading" class="activity-indicator"></ActivityIndicator>
-    </ng-template>
+        </ng-container>
+        <ng-container *ngIf="!isLoading && !recipes">
+            <Background-Label [text]="'SEARCH TO SHOW RECIPES'"
+                              [icon]="'mdi-search'">
+            </Background-Label>
+        </ng-container>
+        <ng-container *ngIf="isLoading">
+            <ActivityIndicator [busy]="isLoading" style="width: 100; height: 100" class="activity-indicator fs-40"></ActivityIndicator>
+        </ng-container>
+    </GridLayout>
 </StackLayout>
 
 

@@ -1,0 +1,25 @@
+<App-Action-Bar></App-Action-Bar>
+
+<StackLayout>
+    <RadDataForm [source]="recipe" tkExampleTitle tkToggleNavButton>
+        <TKEntityProperty tkDataFormProperty name="title" displayName="Title" index="0">
+            <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
+        </TKEntityProperty>
+        <TKEntityProperty tkDataFormProperty name="summary" displayName="Summary" index="1">
+            <TKPropertyEditor tkEntityPropertyEditor type="MultilineText"></TKPropertyEditor>
+        </TKEntityProperty>
+        <TKEntityProperty tkDataFormProperty name="imageUrl" displayName="Image URL" index="2">
+            <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
+        </TKEntityProperty>
+        <TKEntityProperty tkDataFormProperty name="score" displayName="Score" index="3">
+            <TKPropertyEditor tkEntityPropertyEditor type="Number"></TKPropertyEditor>
+        </TKEntityProperty>
+        <TKEntityProperty tkDataFormProperty name="servings" displayName="Servings" index="4" [valuesProvider]="ready">
+            <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
+        </TKEntityProperty>
+        <TKEntityProperty tkDataFormProperty name="readyInMinutes" displayName="Ready in minutes" index="5">
+            <TKPropertyEditor tkEntityPropertyEditor type="Number"></TKPropertyEditor>
+        </TKEntityProperty>
+    </RadDataForm>
+    <Button (tap)="saveRecipe()" [text]="'SAVE RECIPE'"></Button>
+</StackLayout>

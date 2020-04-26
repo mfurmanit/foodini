@@ -8,7 +8,7 @@ import { SimpleRecipe } from '~/app/model/simple-recipe';
 })
 export class RecipesListComponent implements OnInit {
     recipes: SimpleRecipe[];
-    isLoading = false;
+    isLoading = true;
     recipeImageUrl: string;
 
     constructor(private recipeService: RecipeService) {
@@ -18,8 +18,19 @@ export class RecipesListComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    onSubmit(event: any) {
-        this.loadRecipes(event.object.text);
+    onSubmit(args: any) {
+        this.loadRecipes(args.object.text);
+        this.hideKeyboard(args);
+    }
+
+    onClear(args: any) {
+        this.recipes = null;
+        this.hideKeyboard(args);
+    }
+
+    hideKeyboard(args: any) {
+        const searchBar = args.object;
+        searchBar.dismissSoftInput();
     }
 
     loadRecipes(query: string): void {

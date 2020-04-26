@@ -11,6 +11,7 @@ import { TNSFontIconModule } from 'nativescript-ngx-fonticon/nativescript-ngx-fo
 import { components } from '~/app/components';
 import { SnackBarService } from '~/app/services/snack-bar.service';
 import { DatabaseService } from '~/app/services/database.service';
+import { NativeScriptUIDataFormModule } from 'nativescript-ui-dataform/angular';
 
 @NgModule({
     bootstrap: [
@@ -25,7 +26,8 @@ import { DatabaseService } from '~/app/services/database.service';
         TNSFontIconModule.forRoot({
             'mdi': require('~/assets/styles/material-design-icons.css'),
             'fa': require('~/assets/styles/font-awesome.css')
-        })
+        }),
+        NativeScriptUIDataFormModule
     ],
     declarations: [
         AppComponent,
