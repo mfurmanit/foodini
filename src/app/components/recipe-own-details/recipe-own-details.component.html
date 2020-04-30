@@ -1,0 +1,22 @@
+<App-Action-Bar></App-Action-Bar>
+
+<ScrollView>
+    <FlexboxLayout flexDirection="column" *ngIf="recipe">
+        <Recipe-Basic-Info [recipe]="recipe"></Recipe-Basic-Info>
+        <StackLayout class="m-l-20 m-r-20 m-b-20 m-t-10" height="2" backgroundColor="Black"></StackLayout>
+        <Extended-Label [classes]="['c-gold']" [icon]="'mdi-stars'"
+                        [text]="'Score: ' + recipe.score">
+        </Extended-Label>
+        <Extended-Label [icon]="'mdi-local-dining'"
+                        [text]="'Servings: ' + recipe.servings">
+        </Extended-Label>
+        <Extended-Label [icon]="'mdi-alarm'"
+                        [text]="'Ready in minutes: ' + recipe.readyInMinutes">
+        </Extended-Label>
+        <StackLayout class="m-l-20 m-r-20 m-b-20 m-t-20" height="2" backgroundColor="Black"></StackLayout>
+        <Extended-Button [icon]="'mdi-description'"
+                         [text]="'Summary'" (tap)="onSummaryTap()">
+        </Extended-Button>
+        <StackLayout class="m-l-20 m-r-20 m-b-20 m-t-20" height="2" backgroundColor="Black"></StackLayout>
+    </FlexboxLayout>
+</ScrollView>

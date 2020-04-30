@@ -12,6 +12,7 @@ import { RecipesFavouritesListComponent } from '~/app/components/recipes-favouri
 import { RecipeAddComponent } from '~/app/components/recipe-add/recipe-add.component';
 import { RecipesOwnListComponent } from '~/app/components/recipes-own-list/recipes-own-list.component';
 import { BackgroundLabelComponent } from '~/app/components/background-label/background-label.component';
+import { RecipeOwnDetailsComponent } from '~/app/components/recipe-own-details/recipe-own-details.component';
 
 export const components = [
     ActionBarComponent,
@@ -27,7 +28,8 @@ export const components = [
     RecipeInstructionsStepperComponent,
     RecipeAddComponent,
     RecipesOwnListComponent,
-    BackgroundLabelComponent
+    BackgroundLabelComponent,
+    RecipeOwnDetailsComponent
 ];
 
 export * from '~/app/components/action-bar/action-bar.component';
@@ -44,3 +46,4 @@ export * from '~/app/components/recipes-favourites-list/recipes-favourites-list.
 export * from '~/app/components/recipe-add/recipe-add.component';
 export * from '~/app/components/recipes-own-list/recipes-own-list.component';
 export * from '~/app/components/background-label/background-label.component';
+export * from '~/app/components/recipe-own-details/recipe-own-details.component';

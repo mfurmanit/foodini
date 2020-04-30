@@ -5,17 +5,21 @@
                    (submit)="onSubmit($event)">
         </SearchBar>
     </StackLayout>
-    <GridLayout rows="*, auto">
+    <GridLayout rows="*, 60">
         <ng-container *ngIf="recipes && recipes.length > 0 && !isLoading;">
-            <ListView [items]="recipes">
+            <ListView col="0" row="0" [items]="recipes">
                 <ng-template let-item="item">
-                    <FlexboxLayout flexDirection="row" [nsRouterLink]="['/recipes', item.id]">
-                        <Image [width]="70" src="{{recipeImageUrl + '/' + item.image}}">
+                    <GridLayout columns="80, *" rows="auto" [nsRouterLink]="['/recipes', item.id]">
+                        <Image col="0" row="0" src="{{recipeImageUrl + '/' + item.image}}">
                         </Image>
-                        <Label [text]="item.title"></Label>
-                    </FlexboxLayout>
+                        <Label col="1" row="0" class="list-label" [textWrap]="true" [text]="item.title"></Label>
+                    </GridLayout>
                 </ng-template>
             </ListView>
+            <GridLayout columns="50*, 50*" col="0" row="1">
+                <Button [isEnabled]="page > 0" [ngStyle]="{'opacity': (page == 0) ? 0.2 : 1}" class="mdi" col="0" row="0" [text]="'mdi-chevron-left'|fonticon" (tap)="onPreviousPage()"></Button>
+                <Button [isEnabled]="recipes.length === 10" [ngStyle]="{'opacity': (recipes.length < 0) ? 0.2 : 1}" class="mdi" col="1" row="0" [text]="'mdi-chevron-right'|fonticon" (tap)="onNextPage()"></Button>
+            </GridLayout>
         </ng-container>
         <ng-container *ngIf="!isLoading && !recipes">
             <Background-Label [text]="'SEARCH TO SHOW RECIPES'"
@@ -23,7 +27,7 @@
             </Background-Label>
         </ng-container>
         <ng-container *ngIf="isLoading">
-            <ActivityIndicator [busy]="isLoading" style="width: 100; height: 100" class="activity-indicator fs-40"></ActivityIndicator>
+            <ActivityIndicator [busy]="isLoading" class="activity-indicator fs-40"></ActivityIndicator>
         </ng-container>
     </GridLayout>
 </StackLayout>

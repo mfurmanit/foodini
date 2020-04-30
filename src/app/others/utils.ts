@@ -15,7 +15,6 @@ export function mapFavouriteToSimpleRecipe(favouriteRecipe: string[]) {
 
 export function mapOwnRecipe(ownRecipe: string[]) {
     const recipe = new OwnRecipe();
-    console.log(ownRecipe);
     recipe.id = Number(ownRecipe[0]);
     recipe.title = ownRecipe[1];
     recipe.summary = ownRecipe[2];

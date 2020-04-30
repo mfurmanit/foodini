@@ -4,7 +4,7 @@
         <GridLayout rows="*, auto">
             <ListView [items]="recipes">
                 <ng-template let-item="item">
-                    <FlexboxLayout flexDirection="row" [nsRouterLink]="['/recipes', item.id]">
+                    <FlexboxLayout flexDirection="row" [nsRouterLink]="['/recipes-own', item.id]">
                         <Image *ngIf="item.imageUrl && item.imageUrl != 'https://'" [width]="70"
                                src="{{item.imageUrl}}">
                         </Image>

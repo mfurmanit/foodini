@@ -18,8 +18,8 @@ export class RecipeService {
     constructor(private httpClient: HttpClient) {
     }
 
-    getRecipes(query: string): Observable<any> {
-        return this.httpClient.get<ResponseModel<SimpleRecipe>>(`${environment.apiUrl}/recipes/search?query=${query}&number=10`);
+    getRecipes(query: string, page: number): Observable<any> {
+        return this.httpClient.get<ResponseModel<SimpleRecipe>>(`${environment.apiUrl}/recipes/search?query=${query}&number=10&offset=${page * 10}`);
     }
 
     getRecipeDetails(id: string): Observable<any> {

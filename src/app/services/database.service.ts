@@ -20,7 +20,7 @@ export class DatabaseService {
     public recipesFetched: Subject<boolean> = new Subject();
 
     public constructor() {
-        Sqlite.deleteDatabase("my.db");
+        // Sqlite.deleteDatabase("my.db");
         this.initializeData();
     }
 
@@ -70,6 +70,10 @@ export class DatabaseService {
             console.log(rows);
             console.log('Recipes fetched successfully.');
         }, error => console.log(`Error occurred while fetching recipes. Trace is ${error}`));
+    }
+
+    public getRecipe(id: number): ObservableInt<string[]> {
+        return this.database.get('SELECT * FROM recipes WHERE id=?', [id]);
     }
 
     public insertFavourite(id: number, title: string, image: string) {
