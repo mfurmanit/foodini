@@ -27,6 +27,7 @@ export class RecipeDetailsComponent implements OnInit {
         this.recipeService.getRecipeDetails(this.id.toString()).subscribe(data => {
             this.recipe = data as ExtendedRecipe;
             this.recipeService.recipe = this.recipe;
+            console.log(this.recipe.image);
         });
         this.checkFavourites();
     }

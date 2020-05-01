@@ -6,13 +6,14 @@ import { Observable } from 'rxjs/internal/Observable';
 import { SimpleRecipe } from '~/app/model/simple-recipe';
 import { environment } from '~/assets/environment';
 import { ExtendedRecipe } from '~/app/model/extended-recipe';
+import { OwnRecipe } from '~/app/model/own-recipe';
 
 @Injectable({
     providedIn: 'root'
 })
 export class RecipeService {
 
-    recipe: ExtendedRecipe;
+    recipe: ExtendedRecipe | OwnRecipe;
     recipeImageUrl: string = 'https://spoonacular.com/recipeImages/';
 
     constructor(private httpClient: HttpClient) {

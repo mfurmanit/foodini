@@ -18,7 +18,7 @@ export class RecipeInstructionsComponent {
 
     constructor(private recipeService: RecipeService,
                 private snackBarService: SnackBarService) {
-        this.recipe = this.recipeService.recipe;
+        this.recipe = this.recipeService.recipe as ExtendedRecipe;
         this.instructions = this.recipe.analyzedInstructions;
         this.amountOfSteps = this.instructions[0].steps.length;
         this.goToStep();

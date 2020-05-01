@@ -49,15 +49,15 @@ export class DatabaseService {
 
     private initializeRecipesTable(): void {
         this.database.execSQL('CREATE TABLE IF NOT EXISTS recipes (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, summary TEXT,' +
-            ' imageUrl TEXT, score INTEGER, servings INTEGER, readyInMinutes INTEGER)').then(() => {
+            ' image TEXT, score INTEGER, servings INTEGER, readyInMinutes INTEGER)').then(() => {
             console.log('Recipes table created successfully.');
             this.fetchRecipes();
         }, error => console.log(`Error occurred while creating recipes table. Trace is ${error}`));
     }
 
     public insertRecipe(recipe: OwnRecipe) {
-        this.database.execSQL(`INSERT INTO recipes (title, summary, imageUrl, score, servings, readyInMinutes) VALUES (?, ?, ?, ?, ?, ?)`,
-            [recipe.title, recipe.summary, recipe.imageUrl, recipe.score, recipe.servings, recipe.readyInMinutes]).then(() => {
+        this.database.execSQL(`INSERT INTO recipes (title, summary, image, score, servings, readyInMinutes) VALUES (?, ?, ?, ?, ?, ?)`,
+            [recipe.title, recipe.summary, recipe.image, recipe.score, recipe.servings, recipe.readyInMinutes]).then(() => {
             console.log('Recipe row inserted successfully.');
             this.fetchRecipes();
         }, error => console.log(`Error occurred while inserting recipe row. Trace is ${error}`));

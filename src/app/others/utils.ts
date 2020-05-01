@@ -14,11 +14,11 @@ export function mapFavouriteToSimpleRecipe(favouriteRecipe: string[]) {
 }
 
 export function mapOwnRecipe(ownRecipe: string[]) {
-    const recipe = new OwnRecipe();
+    let recipe = new OwnRecipe();
     recipe.id = Number(ownRecipe[0]);
     recipe.title = ownRecipe[1];
     recipe.summary = ownRecipe[2];
-    recipe.imageUrl = ownRecipe[3];
+    recipe.image = ownRecipe[3];
     recipe.score = Number(ownRecipe[4]);
     recipe.servings = Number(ownRecipe[5]);
     recipe.readyInMinutes = Number(ownRecipe[6]);

@@ -3,11 +3,11 @@
         <GridLayout rows="*, auto">
             <ListView [items]="recipes">
                 <ng-template let-item="item">
-                    <FlexboxLayout flexDirection="row" [nsRouterLink]="['/recipes', item.id]">
-                        <Image [width]="70" src="{{item.image}}">
+                    <GridLayout columns="80, *" rows="auto" [nsRouterLink]="['/recipes', item.id]">
+                        <Image col="0" row="0" src="{{item.image}}">
                         </Image>
-                        <Label [text]="item.title"></Label>
-                    </FlexboxLayout>
+                        <Label col="1" row="0" class="list-label" [textWrap]="true" [text]="item.title"></Label>
+                    </GridLayout>
                 </ng-template>
             </ListView>
         </GridLayout>
