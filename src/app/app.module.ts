@@ -12,6 +12,7 @@ import { components } from '~/app/components';
 import { SnackBarService } from '~/app/services/snack-bar.service';
 import { DatabaseService } from '~/app/services/database.service';
 import { NativeScriptUIDataFormModule } from 'nativescript-ui-dataform/angular';
+import { LogService } from '~/app/services/log.service';
 
 @NgModule({
     bootstrap: [
@@ -33,11 +34,16 @@ import { NativeScriptUIDataFormModule } from 'nativescript-ui-dataform/angular';
         AppComponent,
         components
     ],
-    providers: [SnackBarService, DatabaseService, {
-        provide: HTTP_INTERCEPTORS,
-        useClass: RequestInterceptor,
-        multi: true
-    }],
+    providers: [
+        SnackBarService,
+        DatabaseService,
+        LogService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: RequestInterceptor,
+            multi: true
+        }
+    ],
     schemas: [
         NO_ERRORS_SCHEMA
     ]

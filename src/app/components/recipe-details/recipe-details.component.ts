@@ -1,19 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeService } from '~/app/services/recipe.service';
 import { ExtendedRecipe } from '~/app/model/extended-recipe';
 import { DatabaseService } from '~/app/services/database.service';
 import { isNullOrUndefined } from '~/app/others/utils';
 import { SnackBarService } from '~/app/services/snack-bar.service';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
     selector: 'Recipe-Details',
     templateUrl: './recipe-details.component.html'
 })
-export class RecipeDetailsComponent implements OnInit {
+export class RecipeDetailsComponent implements OnInit, OnDestroy {
     id: number;
     recipe: ExtendedRecipe;
     isFavourite: boolean = true;
+    subscription: Subscription = new Subscription();
 
     constructor(private route: ActivatedRoute,
                 private router: Router,
@@ -24,12 +26,19 @@ export class RecipeDetailsComponent implements OnInit {
 
     ngOnInit(): void {
         this.id = +this.route.snapshot.params.id;
-        this.recipeService.getRecipeDetails(this.id.toString()).subscribe(data => {
+        this.getDetails();
+        this.checkFavourites();
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
+
+    private getDetails(): void {
+        this.subscription.add(this.recipeService.getRecipeDetails(this.id.toString()).subscribe(data => {
             this.recipe = data as ExtendedRecipe;
             this.recipeService.recipe = this.recipe;
-            console.log(this.recipe.image);
-        });
-        this.checkFavourites();
+        }));
     }
 
     private checkFavourites(): void {

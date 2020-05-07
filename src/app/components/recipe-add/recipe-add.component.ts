@@ -10,7 +10,7 @@ import { RouterExtensions } from 'nativescript-angular/router';
 })
 export class RecipeAddComponent {
     recipe: OwnRecipe = OwnRecipe.default();
-    ready: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    servings: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     constructor(private databaseService: DatabaseService,
                 private routerExtensions: RouterExtensions,
