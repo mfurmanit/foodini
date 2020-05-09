@@ -16,7 +16,7 @@
             <GridLayout *ngFor="let ingredient of step.ingredients" columns="*, 250" rows="auto">
                 <Label col="0" row="0" [textWrap]="true" class="instruction-item"
                        [text]="ingredient.name | uppercase"></Label>
-                <Image col="1" row="0" [width]="150" [src]="getIngredientImage(ingredient.image)">
+                <Image col="1" row="0" [width]="150" [src]="apiIngredientsUrl + ingredient.image">
                 </Image>
             </GridLayout>
         </StackLayout>
@@ -27,7 +27,7 @@
             <GridLayout *ngFor="let equipment of step.equipment" columns="*, 250" rows="auto">
                 <Label col="0" row="0" [textWrap]="true" class="instruction-item"
                        [text]="equipment.name | uppercase"></Label>
-                <Image col="1" row="0" [width]="150" [src]="getEquipmentImage(equipment.image)">
+                <Image col="1" row="0" [width]="150" [src]="apiEquipmentUrl + equipment.image">
                 </Image>
             </GridLayout>
         </StackLayout>

@@ -11,7 +11,6 @@ import { Subscription } from 'rxjs/internal/Subscription';
 })
 export class RecipesFavouritesListComponent implements OnInit, OnDestroy {
     recipes: SimpleRecipe[];
-    isLoading = false;
     subscription: Subscription = new Subscription();
 
     constructor(private recipeService: RecipeService,
@@ -29,7 +28,7 @@ export class RecipesFavouritesListComponent implements OnInit, OnDestroy {
         this.subscription.unsubscribe();
     }
 
-    loadRecipes(): void {
+    private loadRecipes(): void {
         this.recipes = [];
         this.databaseService.getFavourites()
             .forEach(favourite => this.recipes.push(mapFavouriteToSimpleRecipe(favourite)));

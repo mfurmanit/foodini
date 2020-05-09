@@ -13,9 +13,11 @@ import { RecipeAddComponent } from '~/app/components/recipe-add/recipe-add.compo
 import { RecipesOwnListComponent } from '~/app/components/recipes-own-list/recipes-own-list.component';
 import { BackgroundLabelComponent } from '~/app/components/background-label/background-label.component';
 import { RecipeOwnDetailsComponent } from '~/app/components/recipe-own-details/recipe-own-details.component';
+import { SearchBarComponent } from '~/app/components/search-bar/search-bar.component';
 
 export const components = [
     ActionBarComponent,
+    SearchBarComponent,
     RecipeBasicInfoComponent,
     ExtendedLabelComponent,
     ExtendedButtonComponent,
@@ -47,3 +49,4 @@ export * from '~/app/components/recipe-add/recipe-add.component';
 export * from '~/app/components/recipes-own-list/recipes-own-list.component';
 export * from '~/app/components/background-label/background-label.component';
 export * from '~/app/components/recipe-own-details/recipe-own-details.component';
+export * from '~/app/components/search-bar/search-bar.component';

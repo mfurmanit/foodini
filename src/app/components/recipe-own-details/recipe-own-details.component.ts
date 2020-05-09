@@ -23,14 +23,18 @@ export class RecipeOwnDetailsComponent implements OnInit {
 
     ngOnInit(): void {
         this.id = +this.route.snapshot.params.id;
-        this.database.getRecipe(this.id).then(data => {
-            this.recipe = mapOwnRecipe(data);
-            this.recipeService.recipe = this.recipe;
-        });
+        this.getDetails();
     }
 
     onSummaryTap(): void {
         this.router.navigate(['recipe-summary']);
+    }
+
+    private getDetails(): void {
+        this.database.getRecipe(this.id).then(data => {
+            this.recipe = mapOwnRecipe(data);
+            this.recipeService.recipe = this.recipe;
+        });
     }
 
 }

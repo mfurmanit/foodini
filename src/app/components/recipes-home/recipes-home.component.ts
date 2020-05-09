@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'Recipes-Home',
@@ -7,7 +6,7 @@ import { Router } from '@angular/router';
 })
 export class RecipesHomeComponent {
 
-    constructor(private router: Router) {
+    constructor() {
     }
 
 }

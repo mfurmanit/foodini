@@ -4,6 +4,7 @@ import { RecipeService } from '~/app/services/recipe.service';
 import { AnalyzedInstruction } from '~/app/model/analyzed-instruction';
 import { Step } from '~/app/model/step';
 import { SnackBarService } from '~/app/services/snack-bar.service';
+import { environment } from '~/assets/environment';
 
 @Component({
     selector: 'Recipe-Instructions',
@@ -15,13 +16,21 @@ export class RecipeInstructionsComponent {
     step: Step;
     amountOfSteps: number = 0;
     actualStepIndex: number = 0;
+    apiIngredientsUrl: string;
+    apiEquipmentUrl: string;
 
     constructor(private recipeService: RecipeService,
                 private snackBarService: SnackBarService) {
+        this.apiIngredientsUrl = environment.apiIngredientsUrl;
+        this.apiEquipmentUrl = environment.apiEquipmentUrl;
+        this.initData();
+        this.goToStep();
+    }
+
+    private initData(): void {
         this.recipe = this.recipeService.recipe as ExtendedRecipe;
         this.instructions = this.recipe.analyzedInstructions;
         this.amountOfSteps = this.instructions[0].steps.length;
-        this.goToStep();
     }
 
     nextStep(): void {
@@ -41,15 +50,6 @@ export class RecipeInstructionsComponent {
     goToStep(): void {
         this.step = this.instructions[0].steps[this.actualStepIndex];
         if (this.actualStepIndex + 1 == this.amountOfSteps)
-            this.snackBarService.showSimple('Congratulations! That\'s the last step!')
+            this.snackBarService.showSimple('Congratulations! That\'s the last step!');
     }
-
-    getIngredientImage(path: string): string {
-        return `https://spoonacular.com/cdn/ingredients_250x250/${path}`;
-    }
-
-    getEquipmentImage(path: string): string {
-        return `https://spoonacular.com/cdn/equipment_250x250/${path}`;
-    }
-
 }

@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RecipeService } from '~/app/services/recipe.service';
-import { SimpleRecipe } from '~/app/model/simple-recipe';
 import { DatabaseService } from '~/app/services/database.service';
-import { mapFavouriteToSimpleRecipe, mapOwnRecipe } from '~/app/others/utils';
+import { mapOwnRecipe } from '~/app/others/utils';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { OwnRecipe } from '~/app/model/own-recipe';
 import { Router } from '@angular/router';
@@ -31,13 +30,13 @@ export class RecipesOwnListComponent implements OnInit, OnDestroy {
         this.subscription.unsubscribe();
     }
 
-    loadRecipes(): void {
+    addRecipe() {
+        this.router.navigate(['recipe-add']);
+    }
+
+    private loadRecipes(): void {
         this.recipes = [];
         this.databaseService.getRecipes()
             .forEach(recipe => this.recipes.push(mapOwnRecipe(recipe)));
-    }
-
-    addRecipe() {
-        this.router.navigate(['recipe-add']);
     }
 }

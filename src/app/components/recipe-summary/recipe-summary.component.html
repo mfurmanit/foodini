@@ -3,6 +3,6 @@
 <ScrollView>
     <FlexboxLayout flexDirection="column" *ngIf="recipe">
         <Recipe-Basic-Info [recipe]="recipe"></Recipe-Basic-Info>
-        <HtmlView class="text-center m-15" style="font-size: 20" [html]="recipe.summary"></HtmlView>
+        <HtmlView class="text-center m-15 fs-20" [html]="recipe.summary"></HtmlView>
     </FlexboxLayout>
 </ScrollView>

@@ -2,12 +2,9 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/internal/Subject';
 import { OwnRecipe } from '~/app/model/own-recipe';
 import { LogService } from '~/app/services/log.service';
+import { DbObservable } from '~/app/model/db-observable';
 
 const Sqlite = require('nativescript-sqlite');
-
-export interface DbObservable<T> {
-    then(...any: any): void;
-}
 
 @Injectable({
     providedIn: 'root'

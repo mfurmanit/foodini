@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RecipeService } from '~/app/services/recipe.service';
 import { SimpleRecipe } from '~/app/model/simple-recipe';
 import { isNullOrUndefined } from '~/app/others/utils';
+import { environment } from '~/assets/environment';
 
 @Component({
     selector: 'Recipes-List',
@@ -10,12 +11,12 @@ import { isNullOrUndefined } from '~/app/others/utils';
 export class RecipesListComponent {
     recipes: SimpleRecipe[];
     isLoading = false;
-    recipeImageUrl: string;
+    apiImagesUrl: string;
     query: string;
     page: number = 0;
 
     constructor(private recipeService: RecipeService) {
-        this.recipeImageUrl = this.recipeService.recipeImageUrl;
+        this.apiImagesUrl = environment.apiImagesUrl;
     }
 
     onSubmit(args: any) {
@@ -47,13 +48,17 @@ export class RecipesListComponent {
         searchBar.dismissSoftInput();
     }
 
-    loadRecipes(query?: string): void {
+    private loadRecipes(query?: string): void {
         if (!isNullOrUndefined(query) && query != this.query) {
             this.query = query;
             this.page = 0;
         }
 
         this.isLoading = true;
+        this.getRecipes();
+    }
+
+    private getRecipes(): void {
         this.recipeService.getRecipes(this.query, this.page).subscribe(data => {
             this.recipes = data.results;
             this.isLoading = false;

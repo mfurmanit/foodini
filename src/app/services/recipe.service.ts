@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/internal/operators';
 import { ResponseModel } from '~/app/model/response-model';
 import { Observable } from 'rxjs/internal/Observable';
 import { SimpleRecipe } from '~/app/model/simple-recipe';
@@ -14,7 +13,6 @@ import { OwnRecipe } from '~/app/model/own-recipe';
 export class RecipeService {
 
     recipe: ExtendedRecipe | OwnRecipe;
-    recipeImageUrl: string = 'https://spoonacular.com/recipeImages/';
 
     constructor(private httpClient: HttpClient) {
     }
