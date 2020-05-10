@@ -1,5 +1,26 @@
 # Foodini
 
+Project carried out for university subject. Mobile application written in NativeScript 6.5 using Angular 8.2. Main purpose of the project was to connect with external API (spoonacular), fetch some objects and show them on the list, navigate to specific details and operate on local database (SQLite). Other implemented features include adding/removing recipes from favourites list, showing detailed instructions with equipment/ingredients and adding our own recipes.
+
+## What can be implemented in the future
+
+- adding images to own recipes directly from phone instead of using URL
+- adding detailed instructions in own recipes
+- better look and style
+- searching bar in own and favourite recipes lists
+
+## What I've learned:
+
+- how to build, run and structure simple NativeScript project with Angular
+- how to run NativeScript project on emulator and external device
+- how to configure Android JDK and other tools for NativeScript
+- how to connect with external API (spoonacular)
+- how to operate on local database in NativeScript project (SQLite)
+- how to use and create simple native components
+- how to make better commits and run a project on GitHub
+- I've developed my previous skills in Angular (components, pipes, subjects and everything else)
+- I've developed my previous skills in English a little bit
+
 ## Images
 <details>
 <summary>
