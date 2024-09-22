@@ -1,3 +1,5 @@
+<img  width="150" height="150" src="readme/icon.png" alt="Foodini icon">
+
 # Foodini
 
 Project carried out for university subject. Mobile application written in NativeScript 6.5 using Angular 8.2. Main purpose of the project was to connect with external API (spoonacular), fetch some objects and show them on the list, navigate to specific details and operate on local database (SQLite). Other implemented features include adding/removing recipes from favourites list, showing detailed instructions with equipment/ingredients and adding our own recipes.
